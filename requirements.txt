@@ -2,3 +2,5 @@ streamlit
 atproto
 google-generativeai
 python-dotenv
+streamlit-option-menu
+pillow
