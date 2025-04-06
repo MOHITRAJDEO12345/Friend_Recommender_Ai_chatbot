@@ -18,10 +18,22 @@ def init_db():
                   bluesky_username TEXT,
                   bluesky_password TEXT)''')
     
+    # Reddit credentials table
+    c.execute('''CREATE TABLE IF NOT EXISTS reddit_credentials
+                 (username TEXT PRIMARY KEY,
+                  reddit_username TEXT,
+                  reddit_password TEXT)''')
+    
     # Following data table
     c.execute('''CREATE TABLE IF NOT EXISTS following_data
                  (username TEXT,
                   following_data TEXT,
+                  PRIMARY KEY (username))''')
+    
+    # Reddit subscriptions table
+    c.execute('''CREATE TABLE IF NOT EXISTS reddit_subscriptions
+                 (username TEXT,
+                  subscriptions_data TEXT,
                   PRIMARY KEY (username))''')
     
     # Potential connections table
@@ -32,6 +44,50 @@ def init_db():
     
     conn.commit()
     conn.close()
+
+# Add functions to save and retrieve Reddit credentials
+def save_reddit_credentials(username, reddit_username, reddit_password):
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute('INSERT OR REPLACE INTO reddit_credentials VALUES (?, ?, ?)', 
+              (username, reddit_username, reddit_password))
+    conn.commit()
+    conn.close()
+
+def get_reddit_credentials(username):
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute('SELECT * FROM reddit_credentials WHERE username=?', (username,))
+    result = c.fetchone()
+    conn.close()
+    
+    if result:
+        return {
+            'reddit_username': result[1],
+            'reddit_password': result[2]
+        }
+    return None
+
+# Add functions to save and retrieve Reddit subscriptions
+def save_reddit_subscriptions(username, subscriptions):
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute('INSERT OR REPLACE INTO reddit_subscriptions VALUES (?, ?)', 
+              (username, json.dumps(subscriptions)))
+    conn.commit()
+    conn.close()
+
+def get_reddit_subscriptions(username):
+    conn = sqlite3.connect(DB_PATH)
+    c = conn.cursor()
+    c.execute('SELECT subscriptions_data FROM reddit_subscriptions WHERE username=?', (username,))
+    result = c.fetchone()
+    conn.close()
+    
+    if result and result[0]:
+        # Convert JSON string back to list
+        return json.loads(result[0])
+    return []
 
 def verify_user(username, password):
     conn = sqlite3.connect(DB_PATH)
