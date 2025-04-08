@@ -146,9 +146,9 @@ with st.sidebar:
         default_index=0 if not st.session_state.username else 1,
         styles={
             "container": {"padding": "5!important", "background-color": "#262730"},
-            "icon": {"color": "orange", "font-size": "25px"}, 
+            "icon": {"color": "#FF5555", "font-size": "25px"}, 
             "nav-link": {"font-size": "16px", "text-align": "left", "margin":"0px", "--hover-color": "#3e4046"},
-            "nav-link-selected": {"background-color": "#0083B8"},
+            "nav-link-selected": {"background-color": "#CC0000"},
         }
     )
     
@@ -638,7 +638,7 @@ elif selected == "Chatbot":
                     border-radius: 8px; 
                     font-size: 14px; 
                     font-family: sans-serif;
-                    margin-bottom: 10px;
+                    margin-bottom: 10px; 
                     border: 1px solid #444444;
                     text-align: center;
                     cursor: pointer;
