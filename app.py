@@ -161,8 +161,11 @@ with st.sidebar:
 
 # Main content based on selection
 if selected == "Login":
-    st.title("👋 Welcome to Bluesky Friend Recommender")
+    st.title("👋 Welcome to Friend Recommender Chatbot")
     
+    # Add a short description below the title
+    st.markdown("Discover new friends and connections on Bluesky and Reddit based on your interests and network.")
+
     login_tab, register_tab = st.tabs(["Login", "Register"])
     
     with login_tab:
@@ -198,6 +201,9 @@ if selected == "Login":
             else:
                 save_user(new_username, new_password)
                 st.success("Registration successful! You can now login.")
+
+    # Add footer text below the login section
+    st.markdown(" CREATED BY: MOHIT 12323329 , ANURAG 12304680, ABHINANDAN 12323328")
 
 elif selected == "User Details":
     if not st.session_state.username:
