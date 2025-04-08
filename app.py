@@ -118,8 +118,80 @@ if 'potential_connections' not in st.session_state:
 if 'client' not in st.session_state:
     st.session_state.client = None
 
-# Sidebar navigation using streamlit-option-menu
+# Sidebar navigation using streamlit_option_menu
 with st.sidebar:
+    # Add custom CSS for better visibility in both dark and light modes
+    st.markdown("""
+    <style>
+    /* Navigation text visibility fixes for both modes */
+    .nav-link {
+        color: #ffffff !important; /* White text for dark mode */
+        font-family: 'Poppins', sans-serif !important;
+        font-size: 16px !important;
+        font-weight: 500 !important;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+        background: rgba(0, 0, 0, 0.2) !important; /* Dark background for better contrast */
+        margin-bottom: 5px !important;
+        border-radius: 7px !important;
+    }
+    
+    .nav-link:hover {
+        color: #ffffff !important;
+        background: #0288d1 !important;
+        transform: translateY(-2px) !important;
+        transition: all 0.3s ease !important;
+    }
+    
+    .nav-link-selected {
+        background: #03a9f4 !important;
+        color: #ffffff !important;
+        font-weight: 600 !important;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    /* Fix for the sidebar title */
+    .css-1vq4p4l h4, .css-vk3wp9 h4 { /* Works in both dark/light modes */
+        color: white !important;
+        background: rgba(2, 136, 209, 0.8) !important;
+        padding: 8px 12px !important;
+        border-radius: 8px !important;
+        text-align: center !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    selected = option_menu(
+        'Price Tracker',
+        ['Chatbot', 'About'],
+        menu_icon='cart-check-fill',
+        icons=['chat-dots-fill', 'info-circle-fill'],
+        default_index=0,
+        styles={
+            "container": {"padding": "10px", "background-color": "transparent"},
+            "icon": {"color": "white", "font-size": "20px"},
+            "nav-link": {"font-size": "16px", "text-align": "left", "margin": "0px"},
+            "nav-link-selected": {"background-color": "#03a9f4"},
+        }
+    )
+    
+    # Additional styling for other sidebar elements
+    st.markdown("""
+    <style>
+    /* General sidebar text for better visibility in both modes */
+    .sidebar .sidebar-content {
+        color: white !important;
+    }
+    
+    /* Sidebar headers */
+    .sidebar h1, .sidebar h2, .sidebar h3 {
+        color: white !important;
+        background: rgba(3, 169, 244, 0.2);
+        padding: 5px;
+        border-radius: 5px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
     st.title("Friend Recommender AI")
     
     # Show login status
