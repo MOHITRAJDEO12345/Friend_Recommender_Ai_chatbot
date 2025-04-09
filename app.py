@@ -156,8 +156,7 @@ with st.sidebar:
     st.markdown("### Configuration")
     gemini_api_key = st.text_input("Gemini API Key", value=os.getenv("GEMINI_API_KEY"), type="password")
     temperature = st.slider("Temperature", min_value=0.0, max_value=1.0, value=0.7, step=0.1)
-    st.markdown("---")
-    st.markdown(" CREATED BY: MOHIT 12323329 , ANURAG 12304680, ABHINANDAN 12323328")
+    
 
 # Main content based on selection
 if selected == "Login":
@@ -204,6 +203,14 @@ if selected == "Login":
 
     # Add footer text below the login section
     st.markdown(" CREATED BY: MOHIT 12323329 , ANURAG 12304680, ABHINANDAN 12323328")
+    st.markdown("""    ### How It Works:
+    
+    1. Log in to your account
+    2. Connect your Bluesky and/or Reddit accounts
+    3. Let the AI analyze your network
+    4. View recommendations in the dedicated section
+    5. Chat with the assistant to discover new connections
+    """)
 
 elif selected == "User Details":
     if not st.session_state.username:
@@ -836,14 +843,6 @@ elif selected == "About":
     
     7. **Privacy Focused**: Your credentials are stored securely and only used to access your network data.
     
-    ### How It Works:
-    
-    1. Log in to your account
-    2. Connect your Bluesky and/or Reddit accounts
-    3. Let the AI analyze your network
-    4. View recommendations in the dedicated section
-    5. Chat with the assistant to discover new connections
-    
     ### Technologies Used:
     
     - Streamlit for the user interface
@@ -854,7 +853,11 @@ elif selected == "About":
     
     ---
     
-    **Created by Mohit Anurag and Abhinandan K23SP**
+    **Created by:
+    Mohit Raj Deo
+    Anurag Shukla 
+    Abhinandan Choudhary
+    K23MW**
     """)
 
 # Run the app
